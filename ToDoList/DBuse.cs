@@ -13,26 +13,35 @@ namespace ToDoList
 
         public StreamReader fileIn { get; set; }
         public StreamWriter fileOut { get; set; }
-   
-        public List<string> ReadTextForDb(List<string> sst)
+        
+        public List<string> ReadTextForDb(List<string> list)
         {         
-            fileIn = new StreamReader(path, Encoding.GetEncoding(1251));
+            fileIn = new StreamReader(path, Encoding.Default);
             string str;
           
-            while ((str = fileIn.ReadLine()) != null) //пока поток не пуст
-            {
-                sst.Add(str);            
-            }
-
+            while ((str = fileIn.ReadLine()) != null)       
+                list.Add(str);            
+            
             fileIn.Close();
-            return sst;       
+            return list;       
+        }
+
+        public void DeleteTextForDb(int number, List<string> list)
+        {       
+            fileOut = new StreamWriter(path, false, Encoding.Default);
+            list.RemoveAt(number);
+           
+            foreach(string str in list)         
+                fileOut.WriteLine(str);
+                 
+            fileOut.Close();
         }
 
         public void AddTextForDb(string st)
         {         
-            fileOut = new StreamWriter(path, true, Encoding.Default);
+            fileOut = new StreamWriter(path, true, Encoding.Default);          
             fileOut.WriteLine(st);
             fileOut.Close();
-        }    
+        }  
     }
 }

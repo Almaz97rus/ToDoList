@@ -12,30 +12,25 @@ namespace ToDoList
     public partial class Form1 : Form
     {
         DBuse dBuse = new DBuse();
+        List<string> checkedList = new List<string>();
+        string str;
 
         public Form1()
         {
             InitializeComponent();      
-            textBox1.Tag = textBox1.Text = "Введите ФИО";
+            textBox1.Tag = textBox1.Text = "Введите задание...";
+         
+            dBuse.ReadTextForDb(checkedList);
 
-            List<string> st = new List<string>();
-
-            dBuse.ReadTextForDb(st);
-
-            foreach (string s in st)
-            {
-                checkedListBox1.Items.Add(s);
-            }
-
-           // checkedListBox1.ForeColor = System.Drawing.Color.Red;       
+            foreach (string s in checkedList)           
+                checkedListBox1.Items.Add(s);              
         }
         
         private void button1_Click_1(object sender, EventArgs e)
-        {
-            string st;
-            st = textBox1.Text.ToString();
-            checkedListBox1.Items.Add(st);
-            dBuse.AddTextForDb(st);
+        {          
+            str = textBox1.Text.ToString();
+            checkedListBox1.Items.Add(str);
+            dBuse.AddTextForDb(str);
           
         }
 
@@ -45,18 +40,17 @@ namespace ToDoList
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            checkedListBox1.ClearSelected();          
+        {           
+            foreach (int index in checkedListBox1.CheckedIndices)
+            {
+                checkedListBox1.Items.RemoveAt(index);
+                dBuse.DeleteTextForDb(index, checkedList);       
+            }       
         }
 
         private void textBox1_MouseDown(object sender, MouseEventArgs e)
         {
             textBox1.Clear();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        }   
     }
 }
