@@ -22,7 +22,7 @@ namespace ToDoList
         {         
             using (FileStream fs = new FileStream("DataBase.xml", FileMode.Create))
             {
-                formatter.Serialize(fs, task);
+                 formatter.Serialize(fs, task);
             }
 
             return task;
@@ -31,11 +31,9 @@ namespace ToDoList
         public List<Tasks> GetFileXML(List<Tasks> task)
         {                         
             using (FileStream fs = new FileStream("DataBase.xml", FileMode.Open))
-            {
-                task = (List<Tasks>)formatter.Deserialize(fs);
-            }
-
-            return task;
+            {     
+                return task = (List<Tasks>)formatter.Deserialize(fs);
+            }      
         }
     }
 }

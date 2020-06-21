@@ -11,11 +11,12 @@ using ToDoList.Items;
 namespace ToDoList
 {
     public partial class Form1 : Form
-    {      
+    {
         string str;
 
-        Storage storage = new Storage();  
+        Storage storage = new Storage();
         List<Tasks> containerUncheck = new List<Tasks>();
+        int i;
 
         public Form1()
         {
@@ -24,11 +25,23 @@ namespace ToDoList
             TaskAddBox.Text = "Введите задание...";
 
             foreach (Tasks s in storage.GetFileXML(containerUncheck))
-                CheckedBox.Items.Add(s.Task);
+            {
+                containerUncheck.Add(s);
+
+                if (s.Check == false)
+                {
+                    CheckedBox.Items.Add(s.Task);
+                }
+                if (s.Check == true)
+                {
+                    CompleteTaskBox.Items.Add(s.Task);
+                }
+            }
+
+            i = containerUncheck.Count;
         }
 
-        int i = 0; 
-        
+
         private void Add_Task_Button(object sender, EventArgs e)
         {
             if (TaskAddBox.Text.ToString() == "")
@@ -36,30 +49,33 @@ namespace ToDoList
             else
             {
                 str = TaskAddBox.Text.ToString();
-                CheckedBox.Items.Add(str);           
-   
-                Tasks task = new Tasks(i,str,false);               
+                CheckedBox.Items.Add(str);
+
+                Tasks task = new Tasks(i, str, false);
                 containerUncheck.Add(task);
                 i++;
-
-                storage.SetFileXML(containerUncheck);                            
-            }        
+            }
         }
 
         private void Close_Window_Button(object sender, EventArgs e)
         {
-            Close();   
+            storage.SetFileXML(containerUncheck);
+            Close();
         }
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {           
-            foreach (int index in CheckedBox.CheckedIndices)
-            {
-              
-            }       
-        }
+
         private void textBox1_MouseDown(object sender, MouseEventArgs e)
         {
             TaskAddBox.Clear();
-        }   
+        }
+
+        private void CheckedBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int r = CheckedBox.SelectedIndex;
+         
+            containerUncheck[r].Check = true;
+
+            CompleteTaskBox.Items.Add(containerUncheck.ElementAt(CheckedBox.SelectedIndex).Task);
+            CheckedBox.Items.Remove(containerUncheck.ElementAt(CheckedBox.SelectedIndex).Task);            
+        }
     }
 }
