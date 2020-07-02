@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using ToDoList.Items;
 
@@ -16,31 +17,41 @@ namespace ToDoList
 
         Storage storage = new Storage();
         List<Tasks> containerUncheck = new List<Tasks>();
-        int i;
 
         public Form1()
         {
             InitializeComponent();
 
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.AllowUserToAddRows = false;
+        
             TaskAddBox.Text = "Введите задание...";
 
+            int y = 0;
             foreach (Tasks s in storage.GetFileXML(containerUncheck))
-            {
+            {            
+                dataGridView1.Rows.Add(s.Id, s.Task, s.Check);              
                 containerUncheck.Add(s);
+                s.Id = y;           
+                y++;
+            }
 
-                if (s.Check == false)
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if ((bool)row.Cells[2].Value == true)
                 {
-                    CheckedBox.Items.Add(s.Task);
+                    row.DefaultCellStyle.BackColor = Color.Green;
                 }
-                if (s.Check == true)
-                {
-                    CompleteTaskBox.Items.Add(s.Task);
+                else
+                { 
+                    row.DefaultCellStyle.BackColor = Color.Red; 
                 }
             }
 
-            i = containerUncheck.Count;
-        }
 
+
+
+        }
 
         private void Add_Task_Button(object sender, EventArgs e)
         {
@@ -49,33 +60,50 @@ namespace ToDoList
             else
             {
                 str = TaskAddBox.Text.ToString();
-                CheckedBox.Items.Add(str);
+                dataGridView1.Rows.Add(dataGridView1.Rows.Count+1,str,false);              
 
-                Tasks task = new Tasks(i, str, false);
-                containerUncheck.Add(task);
-                i++;
+              Tasks task = new Tasks(dataGridView1.Rows.Count, str, false);
+              containerUncheck.Add(task);    
             }
         }
 
         private void Close_Window_Button(object sender, EventArgs e)
         {
             storage.SetFileXML(containerUncheck);
-            Close();
+            Close();         
         }
 
         private void textBox1_MouseDown(object sender, MouseEventArgs e)
         {
             TaskAddBox.Clear();
         }
-
-        private void CheckedBox_SelectedIndexChanged(object sender, EventArgs e)
+  
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
-            int r = CheckedBox.SelectedIndex;
-         
-            containerUncheck[r].Check = true;
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                dataGridView1.Rows.Remove(row);
+                containerUncheck.RemoveAt(Convert.ToInt32(row.Cells[0].Value));
+                       
+            }
+        }
 
-            CompleteTaskBox.Items.Add(containerUncheck.ElementAt(CheckedBox.SelectedIndex).Task);
-            CheckedBox.Items.Remove(containerUncheck.ElementAt(CheckedBox.SelectedIndex).Task);            
+        private void CompleteButton_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                row.Cells[2].Value = true;              
+                containerUncheck[Convert.ToInt32(row.Cells[0].Value)].Check = true;
+            }
+        }
+
+        private void Not_Completed_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                row.Cells[2].Value = false;
+                containerUncheck[Convert.ToInt32(row.Cells[0].Value)].Check = false;
+            }
         }
     }
 }

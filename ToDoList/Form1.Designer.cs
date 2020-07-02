@@ -30,13 +30,17 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.TaskAddBox = new System.Windows.Forms.TextBox();
-            this.CheckedBox = new System.Windows.Forms.CheckedListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.CompleteTaskBox = new System.Windows.Forms.ListBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Task = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checked = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.CompleteButton = new System.Windows.Forms.Button();
+            this.Not_Completed = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -65,26 +69,12 @@
             this.TaskAddBox.TabIndex = 2;
             this.TaskAddBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseDown);
             // 
-            // CheckedBox
-            // 
-            this.CheckedBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.CheckedBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CheckedBox.CheckOnClick = true;
-            this.CheckedBox.Cursor = System.Windows.Forms.Cursors.Default;
-            this.CheckedBox.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CheckedBox.FormattingEnabled = true;
-            this.CheckedBox.Location = new System.Drawing.Point(17, 128);
-            this.CheckedBox.Name = "CheckedBox";
-            this.CheckedBox.Size = new System.Drawing.Size(436, 432);
-            this.CheckedBox.TabIndex = 3;
-            this.CheckedBox.SelectedIndexChanged += new System.EventHandler(this.CheckedBox_SelectedIndexChanged);
-            // 
             // button2
             // 
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(905, -1);
+            this.button2.Location = new System.Drawing.Point(412, -1);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(37, 35);
             this.button2.TabIndex = 4;
@@ -111,56 +101,95 @@
             this.label2.Size = new System.Drawing.Size(1200, 2);
             this.label2.TabIndex = 6;
             // 
-            // label3
+            // dataGridView1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(13, 100);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 22);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Выполнить:";
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Task,
+            this.Checked});
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dataGridView1.Location = new System.Drawing.Point(17, 128);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(411, 379);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.UseWaitCursor = true;
             // 
-            // label4
+            // Id
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(478, 100);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 22);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Выполнено:";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
             // 
-            // CompleteTaskBox
+            // Task
             // 
-            this.CompleteTaskBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.CompleteTaskBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CompleteTaskBox.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CompleteTaskBox.FormattingEnabled = true;
-            this.CompleteTaskBox.ItemHeight = 21;
-            this.CompleteTaskBox.Location = new System.Drawing.Point(482, 128);
-            this.CompleteTaskBox.Name = "CompleteTaskBox";
-            this.CompleteTaskBox.Size = new System.Drawing.Size(448, 420);
-            this.CompleteTaskBox.TabIndex = 10;
+            this.Task.HeaderText = "Task";
+            this.Task.Name = "Task";
+            this.Task.ReadOnly = true;
+            // 
+            // Checked
+            // 
+            this.Checked.HeaderText = "Checked";
+            this.Checked.Name = "Checked";
+            this.Checked.ReadOnly = true;
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(17, 513);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(109, 35);
+            this.DeleteButton.TabIndex = 11;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // CompleteButton
+            // 
+            this.CompleteButton.Location = new System.Drawing.Point(160, 513);
+            this.CompleteButton.Name = "CompleteButton";
+            this.CompleteButton.Size = new System.Drawing.Size(109, 35);
+            this.CompleteButton.TabIndex = 12;
+            this.CompleteButton.Text = "Complete";
+            this.CompleteButton.UseVisualStyleBackColor = true;
+            this.CompleteButton.Click += new System.EventHandler(this.CompleteButton_Click);
+            // 
+            // Not_Completed
+            // 
+            this.Not_Completed.Location = new System.Drawing.Point(319, 513);
+            this.Not_Completed.Name = "Not_Completed";
+            this.Not_Completed.Size = new System.Drawing.Size(109, 35);
+            this.Not_Completed.TabIndex = 13;
+            this.Not_Completed.Text = "Not Completed";
+            this.Not_Completed.UseVisualStyleBackColor = true;
+            this.Not_Completed.Click += new System.EventHandler(this.Not_Completed_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(942, 569);
-            this.Controls.Add(this.CompleteTaskBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(447, 569);
+            this.Controls.Add(this.Not_Completed);
+            this.Controls.Add(this.CompleteButton);
+            this.Controls.Add(this.DeleteButton);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.CheckedBox);
             this.Controls.Add(this.TaskAddBox);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,13 +199,16 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox TaskAddBox;
-        private System.Windows.Forms.CheckedListBox CheckedBox;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListBox CompleteTaskBox;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Task;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Checked;
+        private System.Windows.Forms.Button DeleteButton;
+        private System.Windows.Forms.Button CompleteButton;
+        private System.Windows.Forms.Button Not_Completed;
     }
 }
 

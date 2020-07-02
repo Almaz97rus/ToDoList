@@ -16,10 +16,10 @@ namespace ToDoList.Items
         
         }
 
-        //public void Add(Tasks task)
-        //{
-        //    UncheckedContainer.Add(task);
-        //}
+        public void Add(Tasks task)
+        {
+            UncheckedContainer.Add(task);
+        }
 
     }
 }
