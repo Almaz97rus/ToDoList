@@ -12,71 +12,61 @@ using ToDoList.Items;
 namespace ToDoList
 {
     public partial class Form1 : Form
-    {
-        // Нормальное название сделай, нихрена непонятно (например, TextInput)
-        string str;
-
+    {       
         Storage storage = new Storage();
-        // Поменять наименование
-        List<Tasks> containerUncheck = new List<Tasks>();
-
+   
+        List<Tasks> TasksBox = new List<Tasks>();
+  
         public Form1()
-        {
+        {           
             InitializeComponent();
 
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.AllowUserToAddRows = false;
+            DataTasksContainer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DataTasksContainer.AllowUserToAddRows = false;
 
             TaskAddBox.Text = "Введите задание...";
-
-            // Поменять наименование у переменных "y" и "s"
-            int y = 0;
-            foreach (Tasks s in storage.GetFileXML(containerUncheck))
+         
+            foreach (Tasks task in storage.GetFileXML(TasksBox))
             {
-                dataGridView1.Rows.Add(s.Id, s.Task, s.Check);
-                containerUncheck.Add(s);
-                // Не менять ID - на то он и ID
-                s.Id = y;
-                y++;
-            }
+                TasksBox.Add(task);
+              
+                int rowIndex = DataTasksContainer.Rows.Add(task.Id, task.Task, task.Check);
 
-            // Красить ячейки в прошлом цикле. dataGridView1.Rows.Add отдает индекс строки, которую нужно покрасить
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if ((bool)row.Cells[2].Value == true)
-                {
-                    row.DefaultCellStyle.BackColor = Color.Green;
+                if (task.Check == true)
+                {                                 
+                    DataTasksContainer.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Green;
                 }
                 else
                 {
-                    row.DefaultCellStyle.BackColor = Color.Red;
+                    DataTasksContainer.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Red;
                 }
             }
+   
         }
 
         private void Add_Task_Button(object sender, EventArgs e)
         {
-            // Почитать про функцию Trim()
-            if (TaskAddBox.Text.ToString() == "")
+            string textInput;
+      
+            if (TaskAddBox.Text.ToString().Trim() == "")
             {
                 MessageBox.Show("Вы не ввели задание.");
-                // Пример раннего выхода из функции
+                
                 return;
             }
+          
+            textInput = TaskAddBox.Text.ToString().Trim();
 
-            // Trim()
-            str = TaskAddBox.Text.ToString();
+            Tasks task = new Tasks(textInput, TasksBox);
 
-            Tasks task = new Tasks(dataGridView1.Rows.Count + 1, str, false);
+            TasksBox.Add(task);
 
-            containerUncheck.Add(task);
-
-            dataGridView1.Rows.Add(task.Id, task.Task, task.Check);
+            DataTasksContainer.Rows.Add(task.Id, task.Task, task.Check);
         }
 
         private void Close_Window_Button(object sender, EventArgs e)
         {
-            storage.SetFileXML(containerUncheck);
+            storage.SetFileXML(TasksBox);
             Close();
         }
 
@@ -87,28 +77,28 @@ namespace ToDoList
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            foreach (DataGridViewRow row in DataTasksContainer.SelectedRows)
             {
-                dataGridView1.Rows.Remove(row);
-                containerUncheck.RemoveAt(Convert.ToInt32(row.Cells[0].Value));
+                DataTasksContainer.Rows.Remove(row);
+                TasksBox.RemoveAt(Convert.ToInt32(row.Cells[0].Value));
             }
         }
 
         private void CompleteButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            foreach (DataGridViewRow row in DataTasksContainer.SelectedRows)
             {
                 row.Cells[2].Value = true;
-                containerUncheck[Convert.ToInt32(row.Cells[0].Value)].Check = true;
+                TasksBox[Convert.ToInt32(row.Cells[0].Value)].Check = true;
             }
         }
 
         private void Not_Completed_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            foreach (DataGridViewRow row in DataTasksContainer.SelectedRows)
             {
                 row.Cells[2].Value = false;
-                containerUncheck[Convert.ToInt32(row.Cells[0].Value)].Check = false;
+                TasksBox[Convert.ToInt32(row.Cells[0].Value)].Check = false;
             }
         }
     }

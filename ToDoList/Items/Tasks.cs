@@ -12,10 +12,24 @@ namespace ToDoList.Items
         public string Task { get; set; }     
         public bool Check { get; set; }
 
-        public Tasks(string task)
+        public Tasks()
+        { 
+        
+        
+        }
+
+      
+        public Tasks(string task, List<Tasks> Tasks)
         {
-            // ID = Максимальное значение ID в Storage + 1
-            Id = 0;
+            if (Tasks.Count == 0)
+            {
+                Id = 0;
+            }
+            else
+            {
+                Id = Tasks.Count;
+            }
+                
             Check = false;
             Task = task;
         }

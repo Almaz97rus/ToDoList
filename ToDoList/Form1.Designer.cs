@@ -33,14 +33,14 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.DataTasksContainer = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Task = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checked = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.CompleteButton = new System.Windows.Forms.Button();
             this.Not_Completed = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataTasksContainer)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -103,25 +103,25 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DataTasksContainer.AllowUserToAddRows = false;
+            this.DataTasksContainer.AllowUserToDeleteRows = false;
+            this.DataTasksContainer.AllowUserToResizeColumns = false;
+            this.DataTasksContainer.AllowUserToResizeRows = false;
+            this.DataTasksContainer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DataTasksContainer.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.DataTasksContainer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataTasksContainer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.Task,
             this.Checked});
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dataGridView1.Location = new System.Drawing.Point(17, 128);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(411, 379);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.UseWaitCursor = true;
+            this.DataTasksContainer.GridColor = System.Drawing.SystemColors.ActiveBorder;
+            this.DataTasksContainer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.DataTasksContainer.Location = new System.Drawing.Point(17, 128);
+            this.DataTasksContainer.Name = "dataGridView1";
+            this.DataTasksContainer.ReadOnly = true;
+            this.DataTasksContainer.Size = new System.Drawing.Size(411, 379);
+            this.DataTasksContainer.TabIndex = 0;
+            this.DataTasksContainer.UseWaitCursor = true;
             // 
             // Id
             // 
@@ -180,7 +180,7 @@
             this.Controls.Add(this.Not_Completed);
             this.Controls.Add(this.CompleteButton);
             this.Controls.Add(this.DeleteButton);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.DataTasksContainer);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
@@ -189,7 +189,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataTasksContainer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,7 +202,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView DataTasksContainer;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Task;
         private System.Windows.Forms.DataGridViewTextBoxColumn Checked;
