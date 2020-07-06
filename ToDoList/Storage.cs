@@ -18,6 +18,9 @@ namespace ToDoList
     {
         XmlSerializer formatter = new XmlSerializer(typeof(List<Tasks>));
 
+        // Реализовать конструктор, который будет проверять наличие файла "DataBase.xml"
+        // и создавать новый, в случае его отсутствия
+
         public List<Tasks> SetFileXML(List<Tasks> task)
         {         
             using (FileStream fs = new FileStream("DataBase.xml", FileMode.Create))
