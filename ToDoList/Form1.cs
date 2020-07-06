@@ -13,6 +13,7 @@ namespace ToDoList
 {
     public partial class Form1 : Form
     {       
+        // App app = new App();
         Storage storage = new Storage();
    
         List<Tasks> TasksBox = new List<Tasks>();
@@ -25,7 +26,10 @@ namespace ToDoList
             DataTasksContainer.AllowUserToAddRows = false;
 
             TaskAddBox.Text = "Введите задание...";
-         
+
+            // Взаимодействие со Storage внутри App
+            // storage.GetFileXML(TasksBox) -> App.GetTasks()
+
             foreach (Tasks task in storage.GetFileXML(TasksBox))
             {
                 TasksBox.Add(task);
@@ -46,16 +50,15 @@ namespace ToDoList
 
         private void Add_Task_Button(object sender, EventArgs e)
         {
-            string textInput;
-      
-            if (TaskAddBox.Text.ToString().Trim() == "")
+            // App.Add();
+            string textInput = TaskAddBox.Text.ToString().Trim();
+
+            if (textInput == "")
             {
                 MessageBox.Show("Вы не ввели задание.");
                 
                 return;
             }
-          
-            textInput = TaskAddBox.Text.ToString().Trim();
 
             Tasks task = new Tasks(textInput, TasksBox);
 
@@ -66,6 +69,7 @@ namespace ToDoList
 
         private void Close_Window_Button(object sender, EventArgs e)
         {
+            // Сохранение после каждого действия в App
             storage.SetFileXML(TasksBox);
             Close();
         }
@@ -77,6 +81,7 @@ namespace ToDoList
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
+            // App.Delete();
             foreach (DataGridViewRow row in DataTasksContainer.SelectedRows)
             {
                 DataTasksContainer.Rows.Remove(row);
@@ -86,6 +91,7 @@ namespace ToDoList
 
         private void CompleteButton_Click(object sender, EventArgs e)
         {
+            // App.Complete();
             foreach (DataGridViewRow row in DataTasksContainer.SelectedRows)
             {
                 row.Cells[2].Value = true;
@@ -95,6 +101,7 @@ namespace ToDoList
 
         private void Not_Completed_Click(object sender, EventArgs e)
         {
+            // App.Uncomplete();
             foreach (DataGridViewRow row in DataTasksContainer.SelectedRows)
             {
                 row.Cells[2].Value = false;

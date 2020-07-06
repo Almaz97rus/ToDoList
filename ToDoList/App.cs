@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ToDoList
 {
-    class App
+    class App : IApp
     {
     }
 }
