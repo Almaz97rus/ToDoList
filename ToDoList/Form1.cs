@@ -62,7 +62,7 @@ namespace ToDoList
                 str = TaskAddBox.Text.ToString();
                 dataGridView1.Rows.Add(dataGridView1.Rows.Count+1,str,false);              
 
-              Tasks task = new Tasks(dataGridView1.Rows.Count, str, false);
+              Tasks task = new Tasks(dataGridView1.Rows.Count+1, str, false);
               containerUncheck.Add(task);    
             }
         }
