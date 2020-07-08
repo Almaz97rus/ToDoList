@@ -17,28 +17,29 @@ namespace ToDoList.Items
         
         
         }
-
-      
+    
         public Tasks(string task, List<Tasks> Tasks)
         {
+            int max = 0; ;
+
             if (Tasks.Count == 0)
             {
                 Id = 0;
             }
             else
             {
-                Id = Tasks.Count;
+                foreach (Tasks tsk in Tasks)
+                {
+                    if (tsk.Id > max)
+                        max = tsk.Id;
+                
+                }
+
+                Id = max+1;
             }
                 
             Check = false;
             Task = task;
-        }
-
-        public Tasks(int id, string task, bool check)
-        {
-            Id = id;
-            Task = task;
-            Check = check;
-        }
+        }  
     }
 }

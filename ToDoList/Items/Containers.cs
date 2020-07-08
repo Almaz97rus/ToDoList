@@ -9,17 +9,6 @@ namespace ToDoList.Items
     public class Containers
     {
         public List<Tasks> UncheckedContainer { get; set; }
-        public List<Tasks> CompleteContainer { get; set; }
-
-        public Containers()
-        { 
-        
-        }
-
-        public void Add(Tasks task)
-        {
-            UncheckedContainer.Add(task);
-        }
-
+        public List<Tasks> CompleteContainer { get; set; }    
     }
 }

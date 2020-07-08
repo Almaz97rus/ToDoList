@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using ToDoList.Items;
 
 namespace ToDoList
@@ -11,7 +12,7 @@ namespace ToDoList
     {
         List<Tasks> GetTasks();
 
-        bool Add(string TaskText);
+        Tasks Add(string TaskText);
         bool Delete(int TaskId);
         bool Complete(int TaskId);
         bool Uncomplete(int TaskId);

@@ -41,17 +41,14 @@ namespace ToDoList
             }
 
             return task;
-
         }
 
         public List<Tasks> GetFileXML(List<Tasks> task)
         {
-
             using (FileStream fs = new FileStream("DataBase.xml", FileMode.Open))
             {
                 return task = (List<Tasks>)formatter.Deserialize(fs);
             }
-
         }
     }
 }

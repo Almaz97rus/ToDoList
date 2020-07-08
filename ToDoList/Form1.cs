@@ -13,11 +13,11 @@ namespace ToDoList
 {
     public partial class Form1 : Form
     {       
-        // App app = new App();
-        Storage storage = new Storage();
-   
-        List<Tasks> TasksBox = new List<Tasks>();
-  
+        App app = new App();
+
+        //Storage storage = new Storage();
+        //List<Tasks> TasksBox = new List<Tasks>();
+
         public Form1()
         {           
             InitializeComponent();
@@ -26,32 +26,30 @@ namespace ToDoList
             DataTasksContainer.AllowUserToAddRows = false;
 
             TaskAddBox.Text = "Введите задание...";
-
-            // Взаимодействие со Storage внутри App
-            // storage.GetFileXML(TasksBox) -> App.GetTasks()
-
-            foreach (Tasks task in storage.GetFileXML(TasksBox))
-            {
-                TasksBox.Add(task);
               
+            foreach (Tasks task in app.GetTasks())
+            {
                 int rowIndex = DataTasksContainer.Rows.Add(task.Id, task.Task, task.Check);
 
                 if (task.Check == true)
-                {                                 
+                {
                     DataTasksContainer.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Green;
                 }
                 else
                 {
                     DataTasksContainer.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Red;
                 }
-            }
-   
+            }      
         }
 
         private void Add_Task_Button(object sender, EventArgs e)
         {
-            // App.Add();
+            
+            //app.Add();
+
             string textInput = TaskAddBox.Text.ToString().Trim();
+
+         
 
             if (textInput == "")
             {
@@ -59,18 +57,13 @@ namespace ToDoList
                 
                 return;
             }
-
-            Tasks task = new Tasks(textInput, TasksBox);
-
-            TasksBox.Add(task);
-
+       
+            Tasks task = app.Add(textInput);       
             DataTasksContainer.Rows.Add(task.Id, task.Task, task.Check);
         }
 
         private void Close_Window_Button(object sender, EventArgs e)
-        {
-            // Сохранение после каждого действия в App
-            storage.SetFileXML(TasksBox);
+        {              
             Close();
         }
 
@@ -80,12 +73,11 @@ namespace ToDoList
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
-        {
-            // App.Delete();
+        {               
             foreach (DataGridViewRow row in DataTasksContainer.SelectedRows)
             {
                 DataTasksContainer.Rows.Remove(row);
-                TasksBox.RemoveAt(Convert.ToInt32(row.Cells[0].Value));
+                app.Delete(Convert.ToInt32(row.Cells[0].Value));               
             }
         }
 
@@ -94,8 +86,9 @@ namespace ToDoList
             // App.Complete();
             foreach (DataGridViewRow row in DataTasksContainer.SelectedRows)
             {
+
                 row.Cells[2].Value = true;
-                TasksBox[Convert.ToInt32(row.Cells[0].Value)].Check = true;
+                app.Complete(Convert.ToInt32(row.Cells[0].Value));              
             }
         }
 
@@ -105,7 +98,8 @@ namespace ToDoList
             foreach (DataGridViewRow row in DataTasksContainer.SelectedRows)
             {
                 row.Cells[2].Value = false;
-                TasksBox[Convert.ToInt32(row.Cells[0].Value)].Check = false;
+                app.Uncomplete(Convert.ToInt32(row.Cells[0].Value));
+               
             }
         }
     }
