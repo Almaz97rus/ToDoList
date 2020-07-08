@@ -56,8 +56,15 @@ namespace ToDoList
 
         public bool Complete(int TaskId)
         {
-            TasksBox[TaskId].Check = true;
-
+            foreach (Tasks task in TasksBox)
+            {
+                if (task.Id == TaskId)
+                {
+                    task.Check = true;
+                    break;
+                }
+            }
+       
             storage.SetFileXML(TasksBox);
 
             return true;
@@ -65,8 +72,15 @@ namespace ToDoList
 
         public bool Uncomplete(int TaskId)
         {
-             storage.SetFileXML(TasksBox);
-            TasksBox[TaskId].Check = false;
+            foreach (Tasks task in TasksBox)
+            {
+                if (task.Id == TaskId)
+                {
+                    task.Check = false;
+                    break;
+                }
+            }
+            storage.SetFileXML(TasksBox);        
             return true;
         }
     }
