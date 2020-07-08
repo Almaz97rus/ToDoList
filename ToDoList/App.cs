@@ -22,7 +22,7 @@ namespace ToDoList
         }
 
         public List<Tasks> GetTasks()
-        {        
+        {
             return TasksBox;
         }
 
@@ -39,6 +39,11 @@ namespace ToDoList
 
         public bool Delete(int TaskId)
         {
+            /**
+             * А что если не найдется task? Тогда надо вернуть false
+             * @TODO: в блоке if сохрани изменения в файле и верни true
+             * Если будет пройден весь цикл и не сделано изменений - false
+             */
             foreach (Tasks task in TasksBox)
             {
                 if (task.Id == TaskId)
@@ -47,7 +52,6 @@ namespace ToDoList
                     break;
                 }
             }
-            
 
             storage.SetFileXML(TasksBox);
 
@@ -56,6 +60,11 @@ namespace ToDoList
 
         public bool Complete(int TaskId)
         {
+            /**
+             * А что если не найдется task? Тогда надо вернуть false
+             * @TODO: в блоке if сохрани изменения в файле и верни true
+             * Если будет пройден весь цикл и не сделано изменений - false
+             */
             foreach (Tasks task in TasksBox)
             {
                 if (task.Id == TaskId)
@@ -64,7 +73,7 @@ namespace ToDoList
                     break;
                 }
             }
-       
+
             storage.SetFileXML(TasksBox);
 
             return true;
@@ -72,6 +81,11 @@ namespace ToDoList
 
         public bool Uncomplete(int TaskId)
         {
+            /**
+             * А что если не найдется task? Тогда надо вернуть false
+             * @TODO: в блоке if сохрани изменения в файле и верни true
+             * Если будет пройден весь цикл и не сделано изменений - false
+             */
             foreach (Tasks task in TasksBox)
             {
                 if (task.Id == TaskId)
@@ -80,7 +94,7 @@ namespace ToDoList
                     break;
                 }
             }
-            storage.SetFileXML(TasksBox);        
+            storage.SetFileXML(TasksBox);
             return true;
         }
     }

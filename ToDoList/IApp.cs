@@ -13,8 +13,15 @@ namespace ToDoList
         List<Tasks> GetTasks();
 
         Tasks Add(string TaskText);
+        Tasks Edit(string TaskText, bool Check);
         bool Delete(int TaskId);
+        /**
+         * Частный случай функции Edit()
+         */
         bool Complete(int TaskId);
+        /**
+         * Частный случай функции Edit()
+         */
         bool Uncomplete(int TaskId);
     }
 }
