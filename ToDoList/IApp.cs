@@ -6,14 +6,14 @@ using System.Windows.Forms;
 using ToDoList.Items;
 
 namespace ToDoList
-{
-    // После каждого действия сохранять XML файл
+{ 
     interface IApp
     {
-        List<Tasks> GetTasks();
+        List<Task> GetTasks();
 
-        Tasks Add(string TaskText);
-        Tasks Edit(string TaskText, bool Check);
+        Task Add(string TaskText);
+    
+       // Task Edit(string TaskText, bool Check);
         bool Delete(int TaskId);
         /**
          * Частный случай функции Edit()

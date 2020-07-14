@@ -17,14 +17,14 @@ namespace ToDoList
     [Serializable]
     public class Storage
     {
-        XmlSerializer formatter = new XmlSerializer(typeof(List<Tasks>));
+        XmlSerializer formatter = new XmlSerializer(typeof(List<Items.Task>));
      
         public Storage()
         {
             if (!File.Exists("DataBase.xml"))
             {
                 string writePath = @"./DataBase.xml";
-                string text = "<?xml version=\"1.0\"?>\n<ArrayOfTasks xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance \"> \n</ArrayOfTasks>";
+                string text = "<?xml version=\"1.0\"?>\n<ArrayOfTask xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance \">\n</ArrayOfTask>";
            
                 using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
                 {
@@ -33,7 +33,7 @@ namespace ToDoList
             }
         }
 
-        public List<Tasks> SetFileXML(List<Tasks> task)
+        public List<Items.Task> SetFileXML(List<Items.Task> task)
         {
             using (FileStream fs = new FileStream("DataBase.xml", FileMode.Create))
             {
@@ -43,11 +43,11 @@ namespace ToDoList
             return task;
         }
 
-        public List<Tasks> GetFileXML(List<Tasks> task)
+        public List<Items.Task> GetFileXML(List<Items.Task> task)
         {
             using (FileStream fs = new FileStream("DataBase.xml", FileMode.Open))
             {
-                return task = (List<Tasks>)formatter.Deserialize(fs);
+                return task = (List<Items.Task>)formatter.Deserialize(fs);
             }
         }
     }

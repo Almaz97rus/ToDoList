@@ -11,24 +11,24 @@ namespace ToDoList
     class App : IApp
     {
         Storage storage = new Storage();
-        List<Tasks> TasksBox = new List<Tasks>();
+        List<Task> TasksBox = new List<Task>();
 
         public App()
         {
-            foreach (Tasks task in storage.GetFileXML(TasksBox))
+            foreach (Task task in storage.GetFileXML(TasksBox))
             {
                 TasksBox.Add(task);
             }
         }
 
-        public List<Tasks> GetTasks()
+        public List<Task> GetTasks()
         {
             return TasksBox;
         }
 
-        public Tasks Add(string TaskText)
+        public Task Add(string TaskText)
         {
-            Tasks task = new Tasks(TaskText, TasksBox);
+            Task task = new Task(TaskText, TasksBox);
 
             TasksBox.Add(task);
 
@@ -44,7 +44,7 @@ namespace ToDoList
              * @TODO: в блоке if сохрани изменения в файле и верни true
              * Если будет пройден весь цикл и не сделано изменений - false
              */
-            foreach (Tasks task in TasksBox)
+            foreach (Task task in TasksBox)
             {
                 if (task.Id == TaskId)
                 {
@@ -65,11 +65,11 @@ namespace ToDoList
              * @TODO: в блоке if сохрани изменения в файле и верни true
              * Если будет пройден весь цикл и не сделано изменений - false
              */
-            foreach (Tasks task in TasksBox)
+            foreach (Task task in TasksBox)
             {
                 if (task.Id == TaskId)
                 {
-                    task.Check = true;
+                    task.Completed = true;
                     break;
                 }
             }
@@ -86,11 +86,11 @@ namespace ToDoList
              * @TODO: в блоке if сохрани изменения в файле и верни true
              * Если будет пройден весь цикл и не сделано изменений - false
              */
-            foreach (Tasks task in TasksBox)
+            foreach (Task task in TasksBox)
             {
                 if (task.Id == TaskId)
                 {
-                    task.Check = false;
+                    task.Completed = false;
                     break;
                 }
             }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.TaskAddBox = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -36,10 +37,8 @@
             this.DataTasksContainer = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Task = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checked = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeleteButton = new System.Windows.Forms.Button();
-            this.CompleteButton = new System.Windows.Forms.Button();
-            this.Not_Completed = new System.Windows.Forms.Button();
+            this.Completed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DataTasksContainer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,7 +100,7 @@
             this.label2.Size = new System.Drawing.Size(1200, 2);
             this.label2.TabIndex = 6;
             // 
-            // dataGridView1
+            // DataTasksContainer
             // 
             this.DataTasksContainer.AllowUserToAddRows = false;
             this.DataTasksContainer.AllowUserToDeleteRows = false;
@@ -113,13 +112,13 @@
             this.DataTasksContainer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.Task,
-            this.Checked});
+            this.Completed});
             this.DataTasksContainer.GridColor = System.Drawing.SystemColors.ActiveBorder;
             this.DataTasksContainer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.DataTasksContainer.Location = new System.Drawing.Point(17, 128);
-            this.DataTasksContainer.Name = "dataGridView1";
+            this.DataTasksContainer.Location = new System.Drawing.Point(17, 113);
+            this.DataTasksContainer.Name = "DataTasksContainer";
             this.DataTasksContainer.ReadOnly = true;
-            this.DataTasksContainer.Size = new System.Drawing.Size(411, 379);
+            this.DataTasksContainer.Size = new System.Drawing.Size(411, 444);
             this.DataTasksContainer.TabIndex = 0;
             this.DataTasksContainer.UseWaitCursor = true;
             // 
@@ -128,6 +127,7 @@
             this.Id.HeaderText = "Id";
             this.Id.Name = "Id";
             this.Id.ReadOnly = true;
+            this.Id.Visible = false;
             // 
             // Task
             // 
@@ -135,41 +135,17 @@
             this.Task.Name = "Task";
             this.Task.ReadOnly = true;
             // 
-            // Checked
+            // Completed
             // 
-            this.Checked.HeaderText = "Checked";
-            this.Checked.Name = "Checked";
-            this.Checked.ReadOnly = true;
+            this.Completed.HeaderText = "Completed";
+            this.Completed.Name = "Completed";
+            this.Completed.ReadOnly = true;
+            this.Completed.Visible = false;
             // 
-            // DeleteButton
+            // contextMenuStrip1
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(17, 513);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(109, 35);
-            this.DeleteButton.TabIndex = 11;
-            this.DeleteButton.Text = "Delete";
-            this.DeleteButton.UseVisualStyleBackColor = true;
-            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
-            // 
-            // CompleteButton
-            // 
-            this.CompleteButton.Location = new System.Drawing.Point(160, 513);
-            this.CompleteButton.Name = "CompleteButton";
-            this.CompleteButton.Size = new System.Drawing.Size(109, 35);
-            this.CompleteButton.TabIndex = 12;
-            this.CompleteButton.Text = "Complete";
-            this.CompleteButton.UseVisualStyleBackColor = true;
-            this.CompleteButton.Click += new System.EventHandler(this.CompleteButton_Click);
-            // 
-            // Not_Completed
-            // 
-            this.Not_Completed.Location = new System.Drawing.Point(319, 513);
-            this.Not_Completed.Name = "Not_Completed";
-            this.Not_Completed.Size = new System.Drawing.Size(109, 35);
-            this.Not_Completed.TabIndex = 13;
-            this.Not_Completed.Text = "Not Completed";
-            this.Not_Completed.UseVisualStyleBackColor = true;
-            this.Not_Completed.Click += new System.EventHandler(this.Not_Completed_Click);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // Form1
             // 
@@ -177,9 +153,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.ClientSize = new System.Drawing.Size(447, 569);
-            this.Controls.Add(this.Not_Completed);
-            this.Controls.Add(this.CompleteButton);
-            this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.DataTasksContainer);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -205,10 +178,8 @@
         private System.Windows.Forms.DataGridView DataTasksContainer;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Task;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Checked;
-        private System.Windows.Forms.Button DeleteButton;
-        private System.Windows.Forms.Button CompleteButton;
-        private System.Windows.Forms.Button Not_Completed;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Completed;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 
