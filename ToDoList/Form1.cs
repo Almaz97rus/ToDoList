@@ -41,7 +41,7 @@ namespace ToDoList
             Fill();
         }
 
-        private void Fill()
+        public void Fill()
         {
             foreach (Items.Task task in app.GetTasks())
             {
@@ -126,14 +126,15 @@ namespace ToDoList
         }
 
         private void Edit_Text_Click(object sender, EventArgs e)
-        {
-           
-
+        {        
             foreach (DataGridViewRow row in DataTasksContainer.SelectedRows)
             {
-                Form2 newForm = new Form2(Convert.ToString(row.Cells[1].Value));
+                Form2 newForm = new Form2(Convert.ToInt32(row.Cells[0].Value), Convert.ToString(row.Cells[1].Value));
                 newForm.Show();
 
+                DataTasksContainer.Rows.Clear();
+
+                Fill();
             }
         }
     }

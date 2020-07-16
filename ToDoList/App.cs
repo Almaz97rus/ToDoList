@@ -97,5 +97,20 @@ namespace ToDoList
             storage.SetFileXML(TasksBox);
             return true;
         }
+
+        public bool Edit(int TaskId, string TaskText)
+        {          
+            foreach (Task task in TasksBox)
+            {
+                if (task.Id == TaskId)
+                {
+                    task.TextTask = TaskText;
+                    break;
+                }
+            }
+            storage.SetFileXML(TasksBox);
+            return true;
+
+        }
     }
 }

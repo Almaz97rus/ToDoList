@@ -11,17 +11,24 @@ namespace ToDoList
 {
     public partial class Form2 : Form
     {
-        public Form2(string text)
+        App app = new App();
+
+        public string stringValue;
+        public int editId;
+
+   
+        public Form2(int id, string text)
         {
             InitializeComponent();
 
-            EditTextBox.Text = text;
-           
+            EditTextBox.Text = text;       
+            editId = id;
         }
 
         private void CompleteButton_Click(object sender, EventArgs e)
         {
-           
+            app.Edit(editId,EditTextBox.Text);
+            Close();        
         }
     }
 }
