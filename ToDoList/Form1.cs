@@ -98,8 +98,12 @@ namespace ToDoList
                 int taskId = Convert.ToInt32(row.Cells[0].Value);
 
                 DataTasksContainer.Rows.Remove(row);
-             
-                app.Delete(taskId);
+
+
+                if (!app.Delete(taskId))
+                {
+                    MessageBox.Show("Произошла ошибка!");
+                }
             }
         }
     
@@ -109,7 +113,10 @@ namespace ToDoList
             {              
                 ChangeColor(row.Index,true);
 
-                app.Complete(Convert.ToInt32(row.Cells[0].Value));
+                if (!app.Complete(Convert.ToInt32(row.Cells[0].Value)))
+                {
+                    MessageBox.Show("Произошла ошибка!");
+                }
                         
             }
         }
@@ -120,7 +127,10 @@ namespace ToDoList
             {             
                 ChangeColor(row.Index,false);
 
-                app.Uncomplete(Convert.ToInt32(row.Cells[0].Value));
+                if (!app.Uncomplete(Convert.ToInt32(row.Cells[0].Value)))
+                {
+                    MessageBox.Show("Произошла ошибка!");
+                }
              
             }
         }
@@ -129,8 +139,8 @@ namespace ToDoList
         {        
             foreach (DataGridViewRow row in DataTasksContainer.SelectedRows)
             {
-                Form2 newForm = new Form2(Convert.ToInt32(row.Cells[0].Value), Convert.ToString(row.Cells[1].Value));
-                newForm.Show();
+                Form2 newForm = new Form2(Convert.ToInt32(row.Cells[0].Value), Convert.ToString(row.Cells[1].Value), app, Convert.ToBoolean(row.Cells[2].Value));
+                newForm.ShowDialog();
 
                 DataTasksContainer.Rows.Clear();
 

@@ -13,7 +13,7 @@ namespace ToDoList
 
         Task Add(string TaskText);
     
-        bool Edit(int TaskId, string TaskText);
+        bool Edit(int TaskId, string TaskText, bool Check);
         bool Delete(int TaskId);
         /**
          * Частный случай функции Edit()

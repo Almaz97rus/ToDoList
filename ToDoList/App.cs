@@ -8,7 +8,7 @@ using ToDoList.Items;
 
 namespace ToDoList
 {
-    class App : IApp
+    public class App : IApp
     {
         Storage storage = new Storage();
         List<Task> TasksBox = new List<Task>();
@@ -38,68 +38,54 @@ namespace ToDoList
         }
 
         public bool Delete(int TaskId)
-        {
-            /**
-             * А что если не найдется task? Тогда надо вернуть false
-             * @TODO: в блоке if сохрани изменения в файле и верни true
-             * Если будет пройден весь цикл и не сделано изменений - false
-             */
+        {       
             foreach (Task task in TasksBox)
             {
                 if (task.Id == TaskId)
                 {
                     TasksBox.Remove(task);
-                    break;
+                    storage.SetFileXML(TasksBox);
+                    return true;
                 }
             }
 
-            storage.SetFileXML(TasksBox);
-
-            return true;
+            return false;
         }
 
         public bool Complete(int TaskId)
-        {
-            /**
-             * А что если не найдется task? Тогда надо вернуть false
-             * @TODO: в блоке if сохрани изменения в файле и верни true
-             * Если будет пройден весь цикл и не сделано изменений - false
-             */
+        {        
             foreach (Task task in TasksBox)
             {
                 if (task.Id == TaskId)
                 {
                     task.Completed = true;
-                    break;
+                    storage.SetFileXML(TasksBox);
+
+                    return true;
                 }
             }
 
-            storage.SetFileXML(TasksBox);
-
-            return true;
+            return false;
+            
         }
 
         public bool Uncomplete(int TaskId)
-        {
-            /**
-             * А что если не найдется task? Тогда надо вернуть false
-             * @TODO: в блоке if сохрани изменения в файле и верни true
-             * Если будет пройден весь цикл и не сделано изменений - false
-             */
+        {         
             foreach (Task task in TasksBox)
             {
                 if (task.Id == TaskId)
                 {
                     task.Completed = false;
-                    break;
+                    storage.SetFileXML(TasksBox);
+                    return true;
                 }
             }
-            storage.SetFileXML(TasksBox);
-            return true;
+
+            return false;       
         }
 
-        public bool Edit(int TaskId, string TaskText)
-        {          
+        public bool Edit(int TaskId, string TaskText, bool Check)
+        {
             foreach (Task task in TasksBox)
             {
                 if (task.Id == TaskId)
